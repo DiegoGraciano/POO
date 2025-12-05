@@ -1,5 +1,5 @@
 from model import cochesBD
-from view import view_1
+from view import view1
 from tkinter import messagebox
 
 class Controller:
@@ -30,3 +30,22 @@ class Controller:
         else:
             messagebox.showinfo(message="\n\t...No fue posible realizar la acción correctamente, vuelva a intentar...",icon="info")
 
+    @staticmethod
+    def registro_camioneta(marca,color, modelo, velocidad, caballaje, plazas, traccion, cerrada):
+        resultado = cochesBD.Camionetas.insertar(marca,color, modelo, velocidad, caballaje, plazas, traccion, cerrada)
+        Controller.respuesta_sql(resultado)
+        
+    @staticmethod
+    def consultar_camionetas():
+        camioneta = cochesBD.Camionetas.consultar()
+        return camioneta
+
+    @staticmethod
+    def cambiar_camioneta(marca, color, modelo, velocidad, caballaje, plazas,traccion,cerrada, id):
+        resultado = cochesBD.Camionetas.actualizar(marca, color, modelo, velocidad, caballaje, plazas,traccion,cerrada, id)
+        Controller.respuesta_sql(resultado)
+
+    @staticmethod
+    def borrar_camioneta(id):
+        resultado = cochesBD.Camionetas.eliminar(id)
+        Controller.respuesta_sql(resultado)
